@@ -9142,6 +9142,8 @@ immediately.
 \clearpage
 
 # Additional frequency-dependent fitness examples
+__Authors:__ Sara Dorado Alfaro, Miguel HernÃ¡ndez del Valle, Álvaro Huertas García, Diego Mañanes Cayero, Alejandro Martín Muñoz.
+
 ### Introduction
 In the current bullet point, several examples are shown below from the 
 literature on frequency-dependent fitness corresponding to the proposed exercise
@@ -9675,7 +9677,7 @@ plot(S1S2_simulation[[1]], show = "genotypes", type = "line",
      xlim = c(40, 500), 
      ylab = "Number of individuals",
      main = "No competition effect", 
-     col=c("#a37acc","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -9684,7 +9686,7 @@ plot(S1S2_simulation[[1]], show = "genotypes",
      xlim = c(40, 500), 
      ylab = "Number of individuals",
      main = "No competition effect", 
-     col=c("#a37acc","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -9797,7 +9799,7 @@ plot(S1S2_simulation[[1]], show = "genotypes", type = "line",
      xlim = c(40, 500), 
      ylab = "Number of individuals", 
      main = "Competition with Stable Coexistance", 
-     col=c("black","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -9806,7 +9808,7 @@ plot(S1S2_simulation[[1]], show = "genotypes",
      xlim = c(40, 500), 
      ylab = "Number of individuals", 
      main = "Competition with Stable Coexistance", 
-     col=c("black","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -9899,7 +9901,7 @@ plot(S1S2_simulation[[1]], show = "genotypes", type = "line",
      xlim = c(10, 200), 
      ylab = "Number of individuals", 
      main = "Competitive Exclusion", 
-     col=c("#a37acc","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -9908,7 +9910,7 @@ plot(S1S2_simulation[[1]], show = "genotypes",
      xlim = c(10, 200), 
      ylab = "Number of individuals", 
      main = "Competitive Exclusion", 
-     col=c("#a37acc","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -9990,7 +9992,7 @@ plot(S1S2_simulation[[1]], show = "genotypes", type = "line",
      xlim = c(15, 500), 
      ylab = "Number of individuals", 
      main = "Unestable competition", 
-     col=c("#a37acc", "salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -9999,7 +10001,7 @@ plot(S1S2_simulation[[1]], show = "genotypes",
      xlim = c(15, 500), 
      ylab = "Number of individuals", 
      main = "Unestable competition", 
-     col=c("#a37acc", "salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -10047,7 +10049,7 @@ plot(S1S2_simulation[[1]], show = "genotypes", type = "line",
      xlim = c(10, 500), 
      ylab = "Number of individuals", 
      main = "Unestable competition", 
-     col=c("#a37acc","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -10056,7 +10058,7 @@ plot(S1S2_simulation[[1]], show = "genotypes",
      xlim = c(10, 500), 
      ylab = "Number of individuals", 
      main = "Unestable competition", 
-     col=c("#a37acc","salmon", "darkgreen"),
+     col=c("#a37acc", "#f8776d", "#7daf00"),
      font.main=2, font.lab=2,
      cex.main=1.4, cex.lab=1.1,
      las = 1)
@@ -11059,7 +11061,7 @@ Academic Press; 2002. 817 p
 
 ```{r message=F, echo=FALSE}
 ## Recovering normal functionality of plot.oncosimul for plotting legend 
-rm (plot.oncosimul)
+rm (plot.oncosimul, myhsvcols, plot.stacked2, plotClonesSt, xlim.pop.data)
 ```
 
 # Measures of evolutionary predictability and genotype diversity {#evolpredszend}
