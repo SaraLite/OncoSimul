@@ -169,17 +169,10 @@ test_that("There is the same number of genotypes results for each
 ## too quickly and the simulation does not last long enough, there 
 ## may not be time for all the genotypes to appear.  Raising the 
 ## mutation rate may be a solution, or increasing the birth rate of the WT.
-
+## Note that these considerations must also be taken into account with the
+## stripChartPop and meanCompositionPop functions. These two functions use the 
+## results from the middle of the simulation to the end. However, they also have 
+## the risk of not generating the same number of different genotypes in each 
+##simulation. 
 
 ###############################################################################
-
-
-
-
-
-
-
-
-
-
-
