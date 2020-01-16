@@ -1257,7 +1257,7 @@ plotClonesSt <- function(z,
             if (type == "line")
                 inset = -0.193
             else if (type == "stacked")
-                inset = -0.19
+                inset = -0.188
         else
             inset = legend.pos
     } else {
