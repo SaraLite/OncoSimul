@@ -1255,9 +1255,9 @@ plotClonesSt <- function(z,
         ## This value allows a correct position in Rmarkdown files
         if (legend.pos == 0) {
             if (type == "line")
-                inset <- -0.192
+                inset <- -0.202
             else if (type == "stacked")
-                inset <- -0.18
+                inset <- -0.19
         }
         else
             inset <- legend.pos
