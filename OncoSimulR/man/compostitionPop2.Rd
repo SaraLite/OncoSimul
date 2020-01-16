@@ -46,10 +46,10 @@ of the simulations in pop.by.time
 
 \author{
 Sara Dorado Alfaro
-Miguel Hernández del Valle,
-Álvaro Huertas García,
-Diego Mañanes Cayero,
-Alejandro Martin Muñoz
+Miguel Hernandez del Valle,
+Alvaro Huertas Garciaa,
+Diego Mannanes Cayero,
+Alejandro Martin Munnooz
 }
 
 \examples{
