@@ -4,7 +4,7 @@
 
 \title{
 Plot stripChart to see the distribution of the mean results from several 
-iterations of oncoSimulPop since the half to the end of simulation
+iterations of oncoSimulPop since the half to the end of simulation.
 }
 \description{
 It allows to see the distribution of results form several simulations from
@@ -12,29 +12,27 @@ oncosimulPop.It generates a strip chart with the average of the results from the
 }
 \usage{
 meanCompositionPop(objPop, ...)
-
-stripChartPop(dfPop, ylab = "N", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{objPop}{
 Data frame from the class oncosimulpop or oncosimul which contains the results
-of the simulations in pop.by.time
+of the simulations in \code{pop.by.time}.
 }
   \item{dfPop}{
-  Data frame created by meanCompositionPop which contains the mean result from several simulations for each genotype
+  Data frame created by \code{meanCompositionPop} which contains the mean result from several simulations for each genotype.
   }
   \item{ylab}{
-  Text for y axis label
+  Text for y axis label.
   }
 }
 
 \author{
-Sara Dorado Alfaro
+Sara Dorado Alfaro,
 Miguel Hernandez del Valle,
-Alvaro Huertas Garciaa,
+Alvaro Huertas Garcia,
 Diego Mannanes Cayero,
-Alejandro Martin Munnooz
+Alejandro Martin Munnoz.
 }
 
 \examples{

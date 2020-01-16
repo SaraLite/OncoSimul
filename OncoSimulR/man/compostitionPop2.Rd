@@ -13,43 +13,25 @@ in order to see the distribution of the results from several simulations.
 
 }
 \usage{
-compositionPop2(objPop, cols = NULL ...)
-
-
-simul_boxplot2(df, main = FALSE, xlab = "Genotype", ylab = "N", colors)
-}
+compositionPop2(objPop, cols = NULL, ...)
 
 \arguments{
   \item{objPop}{
 Data frame from the class oncosimulpop or oncosimul which contains the results
-of the simulations in pop.by.time
+of the simulations in \code{pop.by.time}.
 }
   \item{cols}{
   Colours used to represent the boxplot. If cols = NULL colours from stacked plots of OncoSimulR are used. 
   }
-  \item{df}{
-  Data frame created by compositionPop2 which contains the last result from several simulations
-  }
-  \item{main}{
-  Optional title for the boxplot. If main = FALSE no title is shown. If main is different from FALSE the boxplot title will be the string passed in main. 
-  }
-  \item{xlab}{
-  Text for x axis label
-  }
-  \item{ylab}{
-  Text for y axis label
-  }
-  \item{colors}{
-  Parameter of simul_boxplot2 which receives the colours used to plot boxplots.
-  }
+  \item{...}{ --- }
 }
 
 \author{
-Sara Dorado Alfaro
+Sara Dorado Alfaro,
 Miguel Hernandez del Valle,
-Alvaro Huertas Garciaa,
+Alvaro Huertas Garcia,
 Diego Mannanes Cayero,
-Alejandro Martin Munnooz
+Alejandro Martin Munnoz
 }
 
 \examples{
