@@ -3,14 +3,15 @@
 \alias{simul_boxplot2}
 
 
-\title{ Plot boxplot to see the distribution of the results from several 
-iterations of oncoSimulPop
+\title{
+  Plot boxplot to see the distribution of the results from several 
+  iterations of oncoSimulPop
 }
 \description{
-Extract the last result for each genotype from different simulations of 
-oncoSimulPop to create a data frame which is used to plot boxplot with ggplot2
-in order to see the distribution of the results from several simulations. 
-
+  Extract the last result for each genotype from different simulations of 
+  oncoSimulPop to create a data frame which is used to plot boxplot with ggplot2
+  in order to see the distribution of the results from several simulations. 
+  Moreover, the mean is represented by a red point on boxplots.
 }
 \usage{
 compositionPop2(objPop, cols = NULL,  xlab = "Genotype",
@@ -18,30 +19,32 @@ compositionPop2(objPop, cols = NULL,  xlab = "Genotype",
 }
 \arguments{
   \item{objPop}{
-Data frame from the class oncosimulpop or oncosimul which contains the results
-of the simulations in \code{pop.by.time}.
+    Data frame from the class \code{oncosimulpop} or \code{oncosimul} which
+    contains the results of the simulations in \code{pop.by.time}.
 }
   \item{cols}{
-  Colours used to represent the boxplot. If cols = NULL colours from stacked plots of OncoSimulR are used. 
+    Colours used to represent the boxplot. If \code{cols == NULL} (by default),
+    colours from stacked plots of OncoSimulR are used. 
   }
   \item{main}{
-  Optional title for the boxplot. If main = FALSE no title is shown. If main is different from FALSE the boxplot title will be the string passed in main. 
+    Optional title for the boxplot. If \code{main == FALSE} (by default), 
+    no title is shown.If main is different from FALSE the boxplot title will 
+    be the string passed in main. 
   }
   \item{xlab}{
-  Text for x axis label
+    Text for x axis label.
   }
   \item{ylab}{
-  Text for y axis label
+    Text for y axis label.
   }
-  \item{...}{ --- }
 }
 
 \author{
-Sara Dorado Alfaro,
-Miguel Hernandez del Valle,
-Alvaro Huertas Garcia,
-Diego Mannanes Cayero,
-Alejandro Martin Munnoz
+  Sara Dorado Alfaro,
+  Miguel Hernandez del Valle,
+  Alvaro Huertas Garcia,
+  Diego Mannanes Cayero,
+  Alejandro Martin Munnoz
 }
 
 \examples{

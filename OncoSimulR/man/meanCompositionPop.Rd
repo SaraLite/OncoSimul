@@ -3,15 +3,16 @@
 \alias{stripChartPop}
 
 \title{
-Plot stripChart to see the distribution of the mean results from several 
-iterations of oncoSimulPop since the half to the end of simulation.
+  Plot stripChart to see the distribution of the mean results from several 
+  iterations of oncoSimulPop since the half to the end of simulation.
 }
 \description{
-It allows to see the distribution of results form several simulations from
-oncosimulPop.It generates a strip chart with the average of the results from the middle to the end of a simulation for each genotype. 
+  It allows to see the distribution of results form several simulations from
+  oncosimulPop.It generates a strip chart with the average of the results from 
+  the middle to the end of a simulation for each genotype. 
 }
 \usage{
-meanCompositionPop(objPop, ylab = "N", ...)
+  meanCompositionPop(objPop, ylab = "N", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,16 +21,20 @@ Data frame from the class oncosimulpop or oncosimul which contains the results
 of the simulations in \code{pop.by.time}.
 }
   \item{ylab}{
-  Text for y axis label.
+    Text for y axis label.
+  }
+  
+  \item{...}{
+    Other arguments passed to plots.
   }
 }
 
 \author{
-Sara Dorado Alfaro,
-Miguel Hernandez del Valle,
-Alvaro Huertas Garcia,
-Diego Mannanes Cayero,
-Alejandro Martin Munnoz.
+  Sara Dorado Alfaro,
+  Miguel Hernandez del Valle,
+  Alvaro Huertas Garcia,
+  Diego Mannanes Cayero,
+  Alejandro Martin Munnoz.
 }
 
 \examples{
