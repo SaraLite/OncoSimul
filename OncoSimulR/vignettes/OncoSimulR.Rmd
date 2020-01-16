@@ -10856,7 +10856,7 @@ simulation <- oncoSimulPop(20,
 
 #Plot trajectorie
 plot(simulation[[1]], show = "genotypes", legend.out = TRUE)
-plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE, legend.pos = -0.215)
+plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE)
 
 ## Agreement: Show boxplot from several simulations. 
 compositionPop2(simulation)
@@ -10913,7 +10913,7 @@ simulation <- oncoSimulPop(20,
 
 #Plot trajectorie
 plot(simulation[[1]], show = "genotypes", legend.out = TRUE)
-plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE, legend.pos = -0.215)
+plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE)
 
 ## Agreement: Show boxplot from several simulations. 
 compositionPop2(simulation)

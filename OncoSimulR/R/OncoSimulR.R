@@ -1251,7 +1251,8 @@ plotClonesSt <- function(z,
         mar <- c(4, 4.8, 3, 6)
         xpd <- TRUE
         position <- "right"
-        ## If legend.pos is zero (by default), the inset value is -0.2
+        ## If legend.pos is zero (by default), the inset value is -0.202
+        ## to type == "line" and -0.19 to type == "stacked".
         ## This value allows a correct position in Rmarkdown files
         if (legend.pos == 0) {
             if (type == "line")
