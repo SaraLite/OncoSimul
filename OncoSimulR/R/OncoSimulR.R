@@ -1248,23 +1248,24 @@ plotClonesSt <- function(z,
     
     ## Set variables to place the legend if legend.out = TRUE
     if (legend.out) {
-        mar = c(4, 4.8, 3, 6)
-        xpd = TRUE
-        position = "right"
+        mar <- c(4, 4.8, 3, 6)
+        xpd <- TRUE
+        position <- "right"
         ## If legend.pos is zero (by default), the inset value is -0.2
         ## This value allows a correct position in Rmarkdown files
-        if (legend.pos == 0)
+        if (legend.pos == 0) {
             if (type == "line")
-                inset = -0.191
+                inset <- -0.192
             else if (type == "stacked")
-                inset = -0.185
+                inset <- -0.18
+        }
         else
-            inset = legend.pos
+            inset <- legend.pos
     } else {
-        mar = c(5, 4, 4, 2) + 0.1
-        xpd = FALSE
-        position = "topleft"
-        inset = 0
+        mar <- c(5, 4, 4, 2) + 0.1
+        xpd <- FALSE
+        position <- "topleft"
+        inset <- 0
     }
     
     if(type == "line") {
