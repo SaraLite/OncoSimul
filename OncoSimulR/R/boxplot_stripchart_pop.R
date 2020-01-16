@@ -1,8 +1,8 @@
 ## Authors: Sara Dorado Alfaro
-##          Miguel Hernández del Valle,
-##          Álvaro Huertas García,
-##          Diego Mañanes Cayero,
-##          Alejandro Martin Muñoz, 
+##          Miguel HernÃ¡ndez del Valle,
+##          Ãlvaro Huertas GarcÃ­a,
+##          Diego MaÃ±anes Cayero,
+##          Alejandro MartÃ­n MuÃ±oz, 
 
 ## Date: 02/01/2020
 

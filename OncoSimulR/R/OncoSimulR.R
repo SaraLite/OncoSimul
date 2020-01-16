@@ -36,7 +36,7 @@ oncoSimulSample <- function(Nindiv,
                                     nd <- (2 : round(0.75 * max(fp)))
                                 }
                                 if(length(nd) == 1) ## for sample
-                                       nd <- c(nd, nd)
+                                    nd <- c(nd, nd)
                                 sample(nd, Nindiv,
                                        replace = TRUE)
                             },
@@ -73,7 +73,7 @@ oncoSimulSample <- function(Nindiv,
     
     ## leaving detectionSize and detectionDrivers as they are, produces
     ## the equivalente of uniform sampling. For last, fix a single number
-
+    
     ## detectionDrivers when there are none: had we left it at 0, then
     ## when there are no drivers we would stop at the first sampling
     ## period.
@@ -83,7 +83,7 @@ oncoSimulSample <- function(Nindiv,
     if(keepPhylog)
         warning(paste("oncoSimulSample does not return the phylogeny",
                       "for now, so there is little point in storing it."))
-
+    
     if(max.num.tries.total < Nindiv)
         stop(paste("You have requested something impossible: ",
                    "max.num.tries.total < Nindiv"))
@@ -100,7 +100,7 @@ oncoSimulSample <- function(Nindiv,
                          detectionSize = detectionSize,
                          detectionDrivers = detectionDrivers,
                          stringsAsFactors = TRUE)[, -1, drop = FALSE]
-
+    
     ## FIXME: we are not triggering an error, just a message. This is on
     ## purpose, since some of these conditions DO provide useful
     ## output. Do we want these to be errors?
@@ -114,7 +114,7 @@ oncoSimulSample <- function(Nindiv,
             UnrecoverExcept = FALSE
         ))    
     }    
-
+    
     f.out.time <- function() {
         message("Run out of time")
         return(list(
@@ -125,7 +125,7 @@ oncoSimulSample <- function(Nindiv,
             UnrecoverExcept = FALSE
         ))    
     }    
-
+    
     f.out.attempts.cpp <- function() {
         message("Run out of attempts (in C++)")
         return(list(
@@ -136,7 +136,7 @@ oncoSimulSample <- function(Nindiv,
             UnrecoverExcept = FALSE
         ))    
     }    
-
+    
     f.out.time.cpp <- function() {
         message("Run out of time (in C++)")
         return(list(
@@ -147,7 +147,7 @@ oncoSimulSample <- function(Nindiv,
             UnrecoverExcept = FALSE
         ))    
     }    
-
+    
     f.out.unrecover.except <- function(x) {
         message("Unrecoverable exception (in C++)")
         return(list(
@@ -159,7 +159,7 @@ oncoSimulSample <- function(Nindiv,
             ExceptionMessage = x$other$ExceptionMessage
         ))    
     }    
-   
+    
     
     startTime <- Sys.time()
     while(TRUE) {
@@ -208,24 +208,24 @@ oncoSimulSample <- function(Nindiv,
             cat("......  Done individual ", indiv,
                 ". Used ", attemptsUsed, "attempts.",
                 ". Running for ", as.double(difftime(Sys.time(),
-                                                    startTime, units = "secs")),
+                                                     startTime, units = "secs")),
                 " secs.\n"
-                )
+            )
         }
         indiv <- indiv + 1
         
         ## We need to check in exactly this order. Attempts left only
         ## matters if no remaining individuals to run. But C++ might bail
         ## out in exactly the last individual
-
+        
         if(  
             (exists("HittedMaxTries", where = tmp) &&
-                 tmp[["HittedMaxTries"]])  ) {
+             tmp[["HittedMaxTries"]])  ) {
             ## in C++ code
             return(f.out.attempts.cpp())
         } else if(  
             (exists("HittedWallTime", where = tmp) &&
-                 tmp[["HittedWallTime"]])  ) {
+             tmp[["HittedWallTime"]])  ) {
             ## in C++ code
             return(f.out.time.cpp())
         } else if( indiv > Nindiv ) {
@@ -250,10 +250,10 @@ oncoSimulSample <- function(Nindiv,
                 UnrecoverExcept = FALSE
             ))
         } else if( attemptsLeft <= 0 ) {
-              ## it is very unlikely this will ever happen. 
+            ## it is very unlikely this will ever happen. 
             return(f.out.attempts())
         } else  if( as.double(difftime(Sys.time(), startTime, units = "secs"))
-                   > max.wall.time.total ) {
+                    > max.wall.time.total ) {
             return(f.out.time())
         } 
     }
@@ -286,7 +286,7 @@ samplePop <- function(x, timeSample = "last",
        (length(popSizeSample) != length(x))) {
         message("length popSizeSample != number of subjects")
         popSizeSample <- rep(popSizeSample, length.out = length(x))
-        }
+    }
     ## A hack to prevent Map from crashing with a NULL
     if(is.null(popSizeSample)) popSizeSample <- -99
     if(inherits(x, "oncosimulpop")) {
@@ -297,7 +297,7 @@ samplePop <- function(x, timeSample = "last",
                          typeSample = typeSample,
                          thresholdWhole = thresholdWhole,
                          popSizeSample = popSizeSample
-                         ))
+                     ))
         ## We need to check if the object is coming from v.2., to avoid
         ## having to force passing a vector of names
         if(is.null(gN) && (!is.null(x[[1]]$geneNames)))
@@ -313,9 +313,9 @@ samplePop <- function(x, timeSample = "last",
             gN <- x$geneNames
     }
     message("\n Subjects by Genes matrix of ",
-        nrow(z), " subjects and ",
+            nrow(z), " subjects and ",
             ncol(z), " genes.\n")
-
+    
     if(propError > 0) {
         z <- add_noise(z, propError)
     }
@@ -387,7 +387,7 @@ oncoSimulPop <- function(Nindiv,
                          verbosity  = 0,
                          mc.cores = detectCores(),
                          seed = "auto") {
-
+    
     if(Nindiv < 1)
         stop("Nindiv must be >= 1")
     
@@ -398,41 +398,41 @@ oncoSimulPop <- function(Nindiv,
     }
     pop <- mclapply(seq.int(Nindiv),
                     function(x)
-                    oncoSimulIndiv(
-                        fp = fp,
-                        model = model,
-                        numPassengers = numPassengers,
-                        mu = mu,
-                        muEF = muEF,
-                        detectionSize = detectionSize,
-                        detectionDrivers = detectionDrivers,
-                        sampleEvery = sampleEvery,
-                        initSize = initSize,
-                        s = s,
-                        sh = sh,
-                        K = K,
-                        keepEvery = keepEvery,
-                        minDetectDrvCloneSz = minDetectDrvCloneSz,
-                        extraTime = extraTime,
-                        finalTime = finalTime,
-                        onlyCancer = onlyCancer,
-                        max.memory = max.memory,
-                        max.wall.time = max.wall.time,
-                        max.num.tries = max.num.tries,
-                        errorHitWallTime = errorHitWallTime,
-                        errorHitMaxTries = errorHitMaxTries,
-                        verbosity = verbosity,
-                        seed = seed, keepPhylog = keepPhylog,
-                        initMutant = initMutant,
-                        mutationPropGrowth = mutationPropGrowth,
-                        detectionProb = detectionProb,
-                        AND_DrvProbExit = AND_DrvProbExit,
-                        fixation = fixation),
+                        oncoSimulIndiv(
+                            fp = fp,
+                            model = model,
+                            numPassengers = numPassengers,
+                            mu = mu,
+                            muEF = muEF,
+                            detectionSize = detectionSize,
+                            detectionDrivers = detectionDrivers,
+                            sampleEvery = sampleEvery,
+                            initSize = initSize,
+                            s = s,
+                            sh = sh,
+                            K = K,
+                            keepEvery = keepEvery,
+                            minDetectDrvCloneSz = minDetectDrvCloneSz,
+                            extraTime = extraTime,
+                            finalTime = finalTime,
+                            onlyCancer = onlyCancer,
+                            max.memory = max.memory,
+                            max.wall.time = max.wall.time,
+                            max.num.tries = max.num.tries,
+                            errorHitWallTime = errorHitWallTime,
+                            errorHitMaxTries = errorHitMaxTries,
+                            verbosity = verbosity,
+                            seed = seed, keepPhylog = keepPhylog,
+                            initMutant = initMutant,
+                            mutationPropGrowth = mutationPropGrowth,
+                            detectionProb = detectionProb,
+                            AND_DrvProbExit = AND_DrvProbExit,
+                            fixation = fixation),
                     mc.cores = mc.cores)
     ## mc.allow.recursive = FALSE ## FIXME: remove?
-                    ## done for covr issue
-                    ## https://github.com/r-lib/covr/issues/335#issuecomment-424116766
-                    
+    ## done for covr issue
+    ## https://github.com/r-lib/covr/issues/335#issuecomment-424116766
+    
     class(pop) <- "oncosimulpop"
     attributes(pop)$call <- match.call()
     return(pop)
@@ -476,19 +476,19 @@ oncoSimulIndiv <- function(fp,
                            AND_DrvProbExit = FALSE,
                            fixation = NULL,
                            seed = NULL
-                           ) {
+) {
     call <- match.call()
     if(all(c(is_null_na(detectionProb),
              is_null_na(detectionSize),
              is_null_na(detectionDrivers),
              is_null_na(finalTime),
              is_null_na(fixation)
-             )))
+    )))
         stop("At least one stopping condition should be given.",
              " At least one of detectionProb, detectionSize, detectionDrivers,",
              " finalTime. Otherwise, we'll run until aborted by max.wall.time,",
              " max.num.tries, and the like.")
-
+    
     if(AND_DrvProbExit && (is_null_na(detectionProb) || is_null_na(detectionDrivers)))
         stop("AND_DrvProbExit is TRUE: both of detectionProb and detectionDrivers",
              " must be non NA.")
@@ -499,7 +499,7 @@ oncoSimulIndiv <- function(fp,
     if(inherits(fp, "fitnessEffects")) {
         s <- sh <- NULL ## force it soon!
     }
-
+    
     ## legacies from poor name choices
     typeFitness <- switch(model,
                           "Bozic" = "bozic1",
@@ -509,7 +509,7 @@ oncoSimulIndiv <- function(fp,
                           "McFarlandLogD" = "mcfarlandlogd",
                           "McFLD" = "mcfarlandlogd",
                           stop("No valid value for model")
-                          )
+    )
     if(initSize < 1)
         stop("initSize < 1")
     
@@ -517,9 +517,9 @@ oncoSimulIndiv <- function(fp,
                                  "McFLD", "McFarlandLogD") )) {
         stop("Using McFarland's model: K cannot be < 1")
     }       ##  if ( !(model %in% c("McFL", "McFarlandLog") )) {
-            ## K <- 1 ## K is ONLY used for McFarland; set it to 1, to avoid
-            ##        ## C++ blowing.
-
+    ## K <- 1 ## K is ONLY used for McFarland; set it to 1, to avoid
+    ##        ## C++ blowing.
+    
     if(typeFitness == "exp") {
         death <- 1
         ## mutationPropGrowth <- 1
@@ -528,12 +528,12 @@ oncoSimulIndiv <- function(fp,
         ## mutationPropGrowth <- 0
     }
     birth <- -99
-
+    
     if( (typeFitness %in% c("mcfarlandlog", "mcfarlandlogd")) &&
-       (sampleEvery > 0.05)) {
+        (sampleEvery > 0.05)) {
         warning("With the McFarland model you often want smaller sampleEvery")
     }
-
+    
     if(minDetectDrvCloneSz == "auto") {
         if(model %in% c("Bozic", "Exp") )
             minDetectDrvCloneSz <- 0
@@ -544,40 +544,40 @@ oncoSimulIndiv <- function(fp,
         else
             stop("Unknown model")
     }
-
+    
     if( (length(mu) > 1) && !inherits(fp, "fitnessEffects"))
         stop("Per-gene mutation rates cannot be used with the old poset format")
-
+    
     if(any(mu < 0)) {
         stop("(at least one) mutation rate (mu) is negative")
     }
     ## We do not test for equality to 0. That might be a weird but
     ## legitimate case?
-
+    
     ## No user-visible magic numbers
     ## if(is.null(keepEvery))
     ##     keepEvery <- -9
     if(is_null_na(keepEvery)) keepEvery <- -9
-
+    
     
     if( (keepEvery > 0) & (keepEvery < sampleEvery)) {
         keepEvery <- sampleEvery
         warning("setting keepEvery <- sampleEvery")
     }
-
+    
     if( (typeFitness == "bozic1") && (mutationPropGrowth) )
         warning("Using fitness Bozic (bozic1) with mutationPropGrowth = TRUE;",
                 "this will have no effect.")
-
+    
     if( (typeFitness == "exp") && (death != 1) )
         warning("Using fitness exp with death != 1")
-
+    
     if(!is_null_na(detectionDrivers) && (detectionDrivers >= 1e9))
         stop("detectionDrivers > 1e9; this doesn't seem reasonable")
     if(is_null_na(detectionDrivers)) detectionDrivers <- (2^31) - 1
     if(is_null_na(detectionSize)) detectionSize <- Inf
     if(is_null_na(finalTime)) finalTime <- Inf
-
+    
     if(is_null_na(sampleEvery)) stop("sampleEvery cannot be NULL or NA")
     
     if(!inherits(fp, "fitnessEffects")) {
@@ -588,7 +588,7 @@ oncoSimulIndiv <- function(fp,
                        "You must specify all of poset, numPassengers",
                        "s, and sh.")
             stop(m)
-           
+            
         }
         if(AND_DrvProbExit) {
             stop("The AND_DrvProbExit = TRUE setting is invalid",
@@ -610,12 +610,12 @@ oncoSimulIndiv <- function(fp,
         }
         if(verbosity >= 2)
             cat(paste("\n Using ", seed, " as seed for C++ generator\n"))
-
+        
         if(!is_null_na(detectionProb)) stop("detectionProb cannot be used in v.1 objects")
         ## if(message.v1)
         ##     message("You are using the old poset format. Consider using the new one.")
-   
-    
+        
+        
         ## A simulation stops if cancer or finalTime appear, the first
         ## one. But if we set onlyCnacer = FALSE, we also accept simuls
         ## without cancer (or without anything)
@@ -735,7 +735,7 @@ oncoSimulIndiv <- function(fp,
         cat("\n       Drivers Last = ", op$MaxDriversLast)
         cat("\n       Final Time = ", op$FinalTime, "\n")
     }
-
+    
     class(op) <- objClass
     attributes(op)$call <- call
     return(op)
@@ -747,8 +747,8 @@ summary.oncosimul <- function(object, ...) {
     pbp <- ("pops.by.time" %in% names(object) )
     
     if(object$other$UnrecoverExcept) { ## yes, when bailing out from
-                                     ## except. can have just minimal
-                                     ## content
+        ## except. can have just minimal
+        ## content
         return(NA)
     } else if( !pbp & (object$HittedWallTime || object$HittedMaxTries) ) {
         return(NA)
@@ -760,7 +760,7 @@ summary.oncosimul <- function(object, ...) {
                         "NumDriversLargestPop", "TotalPresentDrivers",
                         "FinalTime", "NumIter", "HittedWallTime",
                         "HittedMaxTries")]
- 
+        
         tmp$errorMF <- object$other$errorMF
         tmp$minDMratio <- object$other$minDMratio
         tmp$minBMratio <- object$other$minBMratio
@@ -780,7 +780,7 @@ print.oncosimul <- function(x, ...) {
     print(attributes(x)$call)
     cat("\n")
     print(summary(x))
-
+    
     if(inherits(x, "oncosimul2")) {
         ## we know small object
         cat("\n")
@@ -800,7 +800,7 @@ print.oncosimul <- function(x, ...) {
 summary.oncosimulpop <- function(object, ...) {
     ## some simulations could have failed seriously returning a NULL
     ## FIXME: how, why? Out of memory?
-
+    
     rm1 <- which(unlist(lapply(object, is.null)))
     if(length(rm1) > 0) {
         if(length(rm1) < length(object)) {
@@ -813,7 +813,7 @@ summary.oncosimulpop <- function(object, ...) {
             return(NA)
         }
     }
-
+    
     ## I do not want to rm above for two reasons:
     ##   - avoid re-asigning to the object
     ##   - changing the numbering of the indices below if NULLs
@@ -822,22 +822,22 @@ summary.oncosimulpop <- function(object, ...) {
     sumnull <- summary(NULL)
     
     tmp <- lapply(object, summary)
-
+    
     ## rm <- which(unlist(lapply(tmp,
     ##                           function(x) (length(x) == 1) &&
     ##                                       (is.na(x) || is.null(x)))))
-
+    
     rm <- which(unlist(lapply(tmp,
                               function(x) ((length(x) == 1) &&
-                                           (is.na(x) || is.null(x))) ||
-                                          (identical(x, sumnull)))))
+                                               (is.na(x) || is.null(x))) ||
+                                  (identical(x, sumnull)))))
     if(length(rm) > 0)
         if(length(rm) < length(object)) {
-        warning("Some simulations seem to have failed and will be removed",
-                " from the summary. The failed runs are ",
-                paste(rm, collapse = ", "),
-                ".")
-        tmp <- tmp[-rm]
+            warning("Some simulations seem to have failed and will be removed",
+                    " from the summary. The failed runs are ",
+                    paste(rm, collapse = ", "),
+                    ".")
+            tmp <- tmp[-rm]
         } else {
             warning("All simulations failed.")
             return(NA)
@@ -888,8 +888,10 @@ plot.oncosimulpop <- function(x, ask = TRUE,
                               vrange = c(0.8, 1),
                               breakSortColors = "oe",
                               legend.ncols = "auto",
+                              legend.out = FALSE,
+                              legend.pos = 0,
                               ...
-                              ) {
+) {
     op <- par(ask = ask)
     on.exit(par(op))
     null <- lapply(x, function(z)
@@ -924,6 +926,8 @@ plot.oncosimulpop <- function(x, ask = TRUE,
                        vrange = vrange,
                        breakSortColors = breakSortColors,
                        legend.ncols = legend.ncols,
+                       legend.out = legend.out,
+                       legend.pos = legend.pos,
                        ...))
 }
 
@@ -957,7 +961,7 @@ plot.oncosimulpop <- function(x, ask = TRUE,
 ##     else {
 ##         ndr <- colSums(x$Genotypes[x$Drivers, , drop = FALSE])
 ##     }
-    
+
 ##     if(is.null(yl)) {
 ##         if(log %in% c("y", "xy", "yx") )
 ##             yl <- c(1, max(apply(x$pops.by.time[, -1, drop = FALSE], 1, sum)))
@@ -992,7 +996,7 @@ plot.oncosimulpop <- function(x, ask = TRUE,
 
 ##     if(plotClones && plotDrivers)
 ##         par(new = TRUE)
-    
+
 ##     if(plotDrivers){
 ##         plotDrivers0(x,
 ##                      ndr,
@@ -1007,7 +1011,7 @@ plot.oncosimulpop <- function(x, ask = TRUE,
 ##                      log = log, ylim = yl,
 ##                      ...)
 ##     }
-    
+
 ## }
 
 
@@ -1043,24 +1047,26 @@ plot.oncosimul <- function(x,
                            vrange = c(0.8, 1),
                            breakSortColors = "oe",
                            legend.ncols = "auto",
+                           legend.out = FALSE,
+                           legend.pos = 0,
                            ...
-                           ) {
-
-
+) {
+    
+    
     if(!(type %in% c("stacked", "stream", "line")))
         stop("Type of plot unknown: it must be one of",
              "stacked, stream or line")
-
+    
     if(!(show %in% c("genotypes", "drivers")))
         stop("show must be one of ",
              "genotypes or drivers")
-
+    
     if(!(breakSortColors %in% c("oe", "distave", "random")))
         stop("breakSortColors must be one of ",
              "oe, distave, or random")
-
     
-
+    
+    
     colauto <- FALSE
     if((length(col) ==1) && (col == "auto") &&
        (type == "line") && (show == "drivers"))
@@ -1079,16 +1085,16 @@ plot.oncosimul <- function(x,
     
     if(thinData)
         x <- thin.pop.data(x, keep = thinData.keep, min.keep = thinData.min)
-
+    
     if(!is.null(xlim))
         x <- xlim.pop.data(x, xlim)
     
     ## For genotypes, ndr is now the genotypes.  Actually, ndr is now just
     ## a sequence 1:(ncol(y) - 1)
-
+    
     ## The user will want to change the colors, like a colorRamp, etc. Or
     ## rainbow.
-
+    
     ## genotypes and line, always call plotDrivers0
     if(show == "drivers") {
         if(!inherits(x, "oncosimul2"))
@@ -1118,7 +1124,7 @@ plot.oncosimul <- function(x,
         op <- par(mar = m1)
         par(fig = c(0, 1, 0, 0.8), new = TRUE)  
     }
-
+    
     ## Shows its history: plotClones makes plotDrivers0 unneeded with
     ## stacked and stream plots. But now so with line plot.
     ## When showing genotypes, plotDrivers0 with line only used for
@@ -1148,9 +1154,11 @@ plot.oncosimul <- function(x,
                      ylab = ylab,
                      ylim = ylim,
                      xlim = xlim,
+                     legend.out = legend.out,
+                     legend.pos = legend.pos,
                      ...)
     }
-
+    
     if(plotClones && plotDrivers && (type == "line"))
         par(new = TRUE)
     
@@ -1200,13 +1208,15 @@ plotClonesSt <- function(z,
                          ylab = "Number of cells",
                          ylim = NULL,
                          xlim = NULL,
+                         legend.out = FALSE,
+                         legend.pos = 0,
                          ...) {
-
+    
     ## if given ndr, we order columns based on ndr, so clones with more
     ## drivers are plotted last
-
+    
     y <- z$pops.by.time[, 2:ncol(z$pops.by.time), drop = FALSE]
-
+    
     ## Code in stacked and stream plots relies on there being no NAs. Could
     ## change it, but it does not seem reasonable.
     ##  But my original plotting code runs faster and is simpler if 0 are
@@ -1221,8 +1231,8 @@ plotClonesSt <- function(z,
     ## if(is.null(ndr))
     ##     stop("Should never have null ndr")
     ## if(!is.null(ndr)) {
-        ## could be done above, to avoid creating
-        ## more copies
+    ## could be done above, to avoid creating
+    ## more copies
     oo <- order(ndr)
     y <- y[, oo, drop = FALSE]
     ndr <- ndr[oo]
@@ -1235,8 +1245,27 @@ plotClonesSt <- function(z,
                     "pass a col vector of more elements")
         col <- rep(col, length.out = (max(ndr)))[ndr]
     }
-    ## }
+    
+    ## Set variables to place the legend if legend.out = TRUE
+    if (legend.out) {
+        mar = c(4, 4.8, 3, 6)
+        xpd = TRUE
+        position = "right"
+        ## If legend.pos is zero (by default), the inset value is -0.2
+        ## This value allows a correct position in Rmarkdown files
+        if (legend.pos == 0)
+            inset = -0.2
+        else
+            inset = legend.pos
+    } else {
+        mar = c(5, 4, 4, 2) + 0.1
+        xpd = FALSE
+        position = "topleft"
+        inset = 0
+    }
+    
     if(type == "line") {
+        par(mar = mar)
         matplot(x = z$pops.by.time[, 1],
                 y = y,
                 log = log, type = "l",
@@ -1260,14 +1289,13 @@ plotClonesSt <- function(z,
                 if(length(ldrv) > 6) legend.ncols <- 2
                 else legend.ncols <- 1
             }
-            legend(x = "topleft",
-                   title = "Genotypes",
-                   lty = lty,
-                   col = col, lwd = lwd,
-                   legend = ldrv,
+            par(xpd = xpd)
+            legend(x = position, title = "Genotypes", lty = lty, 
+                   inset = inset, col = col, lwd = lwd, legend = ldrv, 
                    ncol = legend.ncols)
         }
     } else {
+        par(mar = mar)
         ymax <- colSums(y)
         if((show == "drivers") || ((show == "genotypes") && (colauto))) {
             cll <- myhsvcols(ndr, ymax, srange = srange, vrange = vrange,
@@ -1315,19 +1343,19 @@ plotClonesSt <- function(z,
                          ...)
         }
         if(show == "drivers") {
+            par(mar = mar)
             if(legend.ncols == "auto") {
                 if(length(cll$colorsLegend$Drivers) > 6) legend.ncols <- 2
                 else legend.ncols <- 1
             }
-            legend(x = "topleft",
-                   title = "Number of drivers",
-                   pch = 15,
-                   ## lty = 1,
-                   ## lwd = 2,
-                   col = cll$colorsLegend$Color,
-                   legend = cll$colorsLegend$Drivers,
-                   ncol = legend.ncols)
+            par(xpd = xpd)
+            legend(x = position, title = "Number of drivers", 
+                   inset = inset, pch = 15, 
+                   col = cll$colorsLegend$Color, 
+                   legend = cll$colorsLegend$Drivers, ncol = legend.ncols)
+            
         } else if (show == "genotypes") {
+            par(mar = mar)
             if(!inherits(z, "oncosimul2")) {
                 ldrv <- genotypeLabel(z)
             } else {
@@ -1339,12 +1367,10 @@ plotClonesSt <- function(z,
                 if(length(ldrv) > 6) legend.ncols <- 2
                 else legend.ncols <- 1
             }
-            legend(x = "topleft",
-                   title = "Genotypes",
-                   pch = 15,
-                   col = cll$colors,
-                   legend = ldrv,
-                   ncol = legend.ncols)
+            par(xpd = xpd)
+            legend(x = position, title = "Genotypes", pch = 15,
+                   inset = inset, lty = lty, lwd = lwd,
+                   col = cll$colors, legend = ldrv, ncol = legend.ncols)
         }
     }
 }
@@ -1370,12 +1396,12 @@ myhsvcols <- function(ndr, ymax, srange = c(0.4, 1),
     ##  - easy to tell when we increase number of drivers
     ##  - reasonably easy to tell in a legend
     ##  - different clones with same number of drivers have "similar" colors
-
+    
     ## I use hsv color specification as this seems the most reasonable.
     
     minor <- table(ndr)
     major <- length(unique(ndr)) ## yeah same as length(minor), but least
-                                 ## surprise
+    ## surprise
     
     h <- seq(from = 0, to = 1, length.out = major + 1)[-1]
     ## do not keep similar hues next to each other
@@ -1396,15 +1422,15 @@ myhsvcols <- function(ndr, ymax, srange = c(0.4, 1),
         seq(from = srange[1], to = srange[2], length.out = x)))
     sv <- unlist(lapply(minor, function(x) 
         seq(from = vrange[1], to = vrange[2], length.out = x))
-        )
-
+    )
+    
     colors <- hsv(hh, sr, sv)
-
+    
     ## This gives "average" or "median" color for legend
     ## colorsLegend <- aggregate(list(Color = colors), list(Drivers = ndr),
     ##                           function(x)
     ##                               as.character(x[((length(x) %/% 2) + 1 )]))
-
+    
     ## Give the most abundant class color as the legend. Simpler to read
     colorsLegend <- by(data.frame(Color = colors, maxnum = ymax),
                        list(Drivers = ndr),
@@ -1416,7 +1442,7 @@ myhsvcols <- function(ndr, ymax, srange = c(0.4, 1),
     ## plot(1:(sum(minor)), col = colors, pch = 16, cex = 3)
     ## legend(1, length(ndr), col = colorsLegend$Color, legend = names(minor),
     ##        pch = 16)
-
+    
     return(list(colors = colors,
                 colorsLegend = colorsLegend))
 }
@@ -1451,7 +1477,7 @@ plotDrivers0 <- function(x,
     if(na.subs){
         y[y == 0] <- NA
     }
-
+    
     ## Likewise, we can never enter here now as timescale fixed at 1. And
     ## this is silly.
     ## if(timescale != 1) {
@@ -1591,7 +1617,7 @@ plotClonePhylog <- function(x, N = 1, t = "last",
     ##     warning("No clone phylogeny available. Exiting without plotting.")
     ##     return(NULL)
     ## }
-        
+    
     l0 <- igraph::layout.reingold.tilford(pc$g)
     if(!timeEvents) {
         plot(pc$g, layout = l0)
@@ -1652,24 +1678,24 @@ get.the.time.for.sample <- function(tmp, timeSample, popSizeSample) {
             the.time <- nrow(tmp$pops.by.time)
         }
     } else if (timeSample %in% c("uniform", "unif")) {
-          candidate.time <- which(tmp$PerSampleStats[, 4] > 0)
-          
-          if (length(candidate.time) == 0) {
-              warning(paste("There is not a single sampled time",
-                            "at which there are any mutants with drivers. ",
-                            "Thus, no uniform sampling possible.",
-                            "You will get NAs"))
-              the.time <- -99
-              ## return(rep(NA, nrow(tmp$Genotypes)))
-          } else if (length(candidate.time) == 1) {
-                message("Only one sampled time period with mutants.")
-                the.time <- candidate.time
-            } else {
-                  the.time <- sample(candidate.time, 1)
-              }
-    } else {
-            stop("Unknown timeSample option")
+        candidate.time <- which(tmp$PerSampleStats[, 4] > 0)
+        
+        if (length(candidate.time) == 0) {
+            warning(paste("There is not a single sampled time",
+                          "at which there are any mutants with drivers. ",
+                          "Thus, no uniform sampling possible.",
+                          "You will get NAs"))
+            the.time <- -99
+            ## return(rep(NA, nrow(tmp$Genotypes)))
+        } else if (length(candidate.time) == 1) {
+            message("Only one sampled time period with mutants.")
+            the.time <- candidate.time
+        } else {
+            the.time <- sample(candidate.time, 1)
         }
+    } else {
+        stop("Unknown timeSample option")
+    }
     return(the.time)
 }
 
@@ -1731,11 +1757,11 @@ get.mut.vector <- function(x, timeSample, typeSample,
 ##         return(rep(NA, nrow(x$Genotypes)))
 ##     } 
 ##     pop <- x$pops.by.time[the.time, -1]
-    
+
 ##     if(all(pop == 0)) {
 ##         stop("You found a bug: this should never happen")
 ##     }
-    
+
 ##     if(typeSample %in% c("wholeTumor", "whole")) {
 ##         popSize <- x$PerSampleStats[the.time, 1]
 ##         return( as.numeric((tcrossprod(pop,
@@ -1794,13 +1820,13 @@ oncoSimul.internal <- function(poset, ## restrict.table,
                                errorHitMaxTries,
                                minDetectDrvCloneSz,
                                extraTime) {
-
+    
     ## the value of 20000, in megabytes, for max.memory sets a limit of ~ 20 GB
-  
-
+    
+    
     ## if(keepEvery < sampleEvery)
     ##     warning("setting keepEvery to sampleEvery")
-
+    
     ## a backdoor to allow passing restrictionTables directly
     if(inherits(poset, "restrictionTable"))
         restrict.table <- poset
@@ -1817,7 +1843,7 @@ oncoSimul.internal <- function(poset, ## restrict.table,
         stop("Largest possible number of genes (loci) is 64 for version 1.",
              "You are strongly encouraged to use the new specification",
              "as in version 2.")
-
+    
     ## These can never be set by the user
     ## if(initSize_species < 10) {
     ##     warning("initSize_species too small?")
@@ -1825,7 +1851,7 @@ oncoSimul.internal <- function(poset, ## restrict.table,
     ## if(initSize_iter < 100) {
     ##     warning("initSize_iter too small?")
     ## }
-
+    
     ## numDrivers <- nrow(restrict.table)
     if(length(unique(restrict.table[, 1])) != numDrivers)
         stop("BAIL OUT NOW: length(unique(restrict.table[, 1])) != numDrivers)")
@@ -1839,10 +1865,10 @@ oncoSimul.internal <- function(poset, ## restrict.table,
         stop("BAIL OUT NOW: numDrivers > numGenes")
     
     non.dep.drivers <- restrict.table[which(restrict.table[, 2] == 0), 1]
-
-
-
-
+    
+    
+    
+    
     ## if( (is.null(endTimeEvery) || (endTimeEvery > 0)) &&
     ##    (typeFitness %in% c("bozic1", "exp") )) {
     ##     warning(paste("endTimeEvery will take a positive value. ",
@@ -1866,48 +1892,48 @@ oncoSimul.internal <- function(poset, ## restrict.table,
     }
     if(any(apply(restrict.table, 1, neg.deps)))
         stop("BAIL OUT NOW: Negative dependencies in restriction table")
-
+    
     ## transpose the table
     rtC <- convertRestrictTable(restrict.table)
-
+    
     
     return(c(
         BNB_Algo5(restrictTable = rtC,
-        numDrivers = numDrivers,
-        numGenes = numGenes,
-        typeCBN_= typeCBN,
-        s = s, 
-        death = death,
-        mu = mu,
-        initSize = initSize,
-        sampleEvery = sampleEvery,
-        detectionSize = detectionSize,
-        finalTime = finalTime,
-        initSp = initSize_species,
-        initIt = initSize_iter,
-        seed = seed,
-        verbosity = verbosity,
-        speciesFS = speciesFS,
-        ratioForce = ratioForce,
-        typeFitness_ = typeFitness,
-        maxram = max.memory,
-        mutationPropGrowth = as.integer(mutationPropGrowth),
-        initMutant = initMutant,
-        maxWallTime = max.wall.time,
-        keepEvery = keepEvery,
-        sh = sh,
-        K = K,
-        detectionDrivers = detectionDrivers,
-        onlyCancer = onlyCancer,
-        errorHitWallTime = errorHitWallTime,
-        maxNumTries = max.num.tries,
-        errorHitMaxTries = errorHitMaxTries,
-        minDetectDrvCloneSz = minDetectDrvCloneSz,
-        extraTime = extraTime
-    ),
-    NumDrivers = numDrivers
-             ))
-
+                  numDrivers = numDrivers,
+                  numGenes = numGenes,
+                  typeCBN_= typeCBN,
+                  s = s, 
+                  death = death,
+                  mu = mu,
+                  initSize = initSize,
+                  sampleEvery = sampleEvery,
+                  detectionSize = detectionSize,
+                  finalTime = finalTime,
+                  initSp = initSize_species,
+                  initIt = initSize_iter,
+                  seed = seed,
+                  verbosity = verbosity,
+                  speciesFS = speciesFS,
+                  ratioForce = ratioForce,
+                  typeFitness_ = typeFitness,
+                  maxram = max.memory,
+                  mutationPropGrowth = as.integer(mutationPropGrowth),
+                  initMutant = initMutant,
+                  maxWallTime = max.wall.time,
+                  keepEvery = keepEvery,
+                  sh = sh,
+                  K = K,
+                  detectionDrivers = detectionDrivers,
+                  onlyCancer = onlyCancer,
+                  errorHitWallTime = errorHitWallTime,
+                  maxNumTries = max.num.tries,
+                  errorHitMaxTries = errorHitMaxTries,
+                  minDetectDrvCloneSz = minDetectDrvCloneSz,
+                  extraTime = extraTime
+        ),
+        NumDrivers = numDrivers
+    ))
+    
 }
 
 OncoSimulWide2Long <- function(x) {
@@ -1928,7 +1954,7 @@ OncoSimulWide2Long <- function(x) {
     oo <- order(ndr)
     y <- y[, oo, drop = FALSE]
     ndr <- ndr[oo]
-
+    
     nc <- ncol(y)
     nr <- nrow(y)
     y <- as.vector(y)
@@ -1974,9 +2000,9 @@ create.drivers.by.time <- function(tmp, ndr) {
                                                                   drop = FALSE],
                                                  1,
                                                  function(x)
-                                                 tapply(x,
-                                                        CountNumDrivers,
-                                                        sum)))) 
+                                                     tapply(x,
+                                                            CountNumDrivers,
+                                                            sum)))) 
             } else {
                 drivers.by.time <- cbind(tmp$pops.by.time[, c(1),
                                                           drop = FALSE] ,
@@ -2012,8 +2038,8 @@ thin.pop.data <- function(x, keep = 0.1, min.keep = 3) {
 
 xlim.pop.data <- function(x, xlim) {
     x$pops.by.time <- x$pops.by.time[
-    (x$pops.by.time[, 1] >= xlim[1]) &
-    (x$pops.by.time[, 1] <= xlim[2]),   ]
+        (x$pops.by.time[, 1] >= xlim[1]) &
+            (x$pops.by.time[, 1] <= xlim[2]),   ]
     return(x)
 }
 
@@ -2043,7 +2069,7 @@ is_null_na <- function(x) {
     if( is.null(x) ||
         ( (length(x) == 1) && (is.na(x)) ) ||
         ( (length(x) == 1) && (x == "") ) ## careful here
-       )  {
+    )  {
         return(TRUE)
     } else {
         return(FALSE)
@@ -2071,7 +2097,7 @@ is_null_na <- function(x) {
 ## mcflEv <- function(p, s, initSize) {
 ##     ## expects vectors for p and s
 ##     K <- initSize/(exp(1) - 1)
-    
+
 ##     ## Expected number at equilibrium
 ##     return( K * (exp(prod((1 + s)^p)) - 1))
 ## }
@@ -2095,7 +2121,7 @@ is_null_na <- function(x) {
 ## }
 
 ## plotSimpson <- function(z) {
-    
+
 ##     h <- apply(z$pops.by.time[, 2:ncol(z$pops.by.time), drop = FALSE],
 ##                1, shannonI)
 ##     plot(x = z$pops.by.time[, 1],
@@ -2111,7 +2137,7 @@ is_null_na <- function(x) {
 ##     ## drivers are plotted last
 
 ##     y <- z$pops.by.time[, 2:ncol(z$pops.by.time), drop = FALSE]
-    
+
 ##     if(na.subs){
 ##         y[y == 0] <- NA
 ##     }
@@ -2157,8 +2183,8 @@ is_null_na <- function(x) {
 ##     num.genes <- max(poset) - 1 ## as root is not a gene
 ##     genotype <-t(c(1, rep(NA, num.genes)))
 ##     colnames(genotype) <- as.character(0:num.genes)
-    
-    
+
+
 ##     poset$runif <- runif(nrow(poset))
 ##     ## this.relation.prob.OK could be done outside, but having it inside
 ##     ## the loop would allow to use different thresholds for different
@@ -2174,7 +2200,7 @@ is_null_na <- function(x) {
 ##             genotype[child] <- genotype[child]*(this.relation.prob.OK * the.parent)
 ##     }
 ##     ##    }
-    
+
 ##     return(genotype)
 ## }
 
@@ -2190,13 +2216,13 @@ is_null_na <- function(x) {
 ## get.mut.vector.whole <- function(tmp, timeSample = "last", threshold = 0.5) {
 ##     ## Obtain, from  results from a simulation run, the vector
 ##     ## of 0/1 corresponding to each gene.
-    
+
 ##     ## threshold is the min. proportion for a mutation to be detected
 ##     ## We are doing whole tumor sampling here, as in Sprouffske
 
 ##     ## timeSample: do we sample at end, or at a time point, chosen
 ##     ## randomly, from all those with at least one driver?
-    
+
 ##     if(timeSample == "last") {
 ##         if(tmp$TotalPopSize == 0)
 ##             warning(paste("Final population size is 0.",
@@ -2207,7 +2233,7 @@ is_null_na <- function(x) {
 ##                         tmp$Genotypes)/tmp$TotalPopSize) > threshold))
 ##     } else if (timeSample %in% c("uniform", "unif")) {
 ##           candidate.time <- which(tmp$PerSampleStats[, 4] > 0)
-          
+
 ##           if (length(candidate.time) == 0) {
 ##               warning(paste("There is not a single sampled time",
 ##                             "at which there are any mutants.",
@@ -2244,12 +2270,12 @@ is_null_na <- function(x) {
 
 ##     ## timeSample: do we sample at end, or at a time point, chosen
 ##     ## randomly, from all those with at least one driver?
-    
+
 ##     if(timeSample == "last") {
 ##         the.time <- nrow(tmp$pops.by.time)
 ##     } else if (timeSample %in% c("uniform", "unif")) {
 ##          candidate.time <- which(tmp$PerSampleStats[, 4] > 0)
-         
+
 ##          if (length(candidate.time) == 0) {
 ##              warning(paste("There is not a single sampled time",
 ##                            "at which there are any mutants.",
