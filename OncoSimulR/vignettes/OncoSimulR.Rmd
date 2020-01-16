@@ -9142,9 +9142,10 @@ immediately.
 \clearpage
 
 # Additional frequency-dependent fitness examples
-__Authors:__ Sara Dorado Alfaro, Miguel HernÃ¡ndez del Valle, Álvaro Huertas García, Diego Mañanes Cayero, Alejandro Martín Muñoz.
+__Authors:__ Sara Dorado Alfaro, Miguel Hernández del Valle, 
+Álvaro Huertas García, Diego Mañanes Cayero, Alejandro Martín Muñoz.
 
-### Introduction
+## Introduction
 In the current bullet point, several examples are shown below from the 
 literature on frequency-dependent fitness corresponding to the proposed exercise
 2 programming for the subject Programming and Statistics with R (Master's Degree
@@ -9158,7 +9159,7 @@ To generate the current vignette, the cascading style sheets (CSS) from the
 OncoSimulR package have been used with slight modifications to keep as 
 much similarity as possible. 
 
-#### News and functions used
+## News and functions used
 The OncoSimulR package and ggplot2 are required to generate the vignette plots. 
 For reproducible vignette results the seed has been fixed. The number of cores 
 used to run the simulations has also been set to 4 (in case of Windows it will 
@@ -9167,10 +9168,6 @@ The parallel programming package named parallel is used with  _L’Ecuyer-CMRG_
 random number generator (RNG) in order to take advantage of the benefit of 
 parallel computing. 
 ```{r message = FALSE, warning = FALSE}
-## Packages
-library(OncoSimulR)
-library(ggplot2)
-
 ## Set a seed to oncoSimulIndiv 
 set.seed(1)
 
@@ -9198,9 +9195,9 @@ with oscillating trajectories, it is preferable to represent the consensus
 between the means of the results from the middle of the simulation to its end 
 between several simulations.
 
-### Rock-paper-scissors model in bacterial community
+## Rock-paper-scissors model in bacterial community
 
-#### Introduction
+### Introduction
 
 This example is inspired by the article _Local dispersal promotes biodiversity_
 _in a real game of rock paper scissors_ [[8]](#Kerr). It describes the 
@@ -9388,7 +9385,7 @@ plot(resultscrs3[[3]], show = "genotypes", type = "line", cex.lab=1.1,
 In all the cases all three strains survive, with C having a much smaller
 population than the other two.
 
-### Evolutionary games theory: Hawk and Dove example
+## Evolutionary games theory: Hawk and Dove example
 
 The example we are going to show is one of the first games that Maynar Smith 
 analyzed. This classic game is: _Hawk and Dove_ [3](#Chicken), 
@@ -9536,7 +9533,7 @@ To sum up, this example shows that when the risks of contest injury or death
 and doves, and the proportion of doves will exceed that of the aggressors. 
 This explains behaviours observed in nature.
 
-### The Lotka-Volterra model of competition between two competing species
+## The Lotka-Volterra model of competition between two competing species
 
 Species do not exist in isolation of one another. The simple models of 
 exponential and logistic growth fail to capture the fact that the growth of 
@@ -9627,7 +9624,7 @@ S1S2_LV("r1", "r2", "K1", "K2", "a_12", "a_21", "awt")
 
 ```
 
-#### Case 1: No competition
+### Case 1: No competition
 
 There is no competition, the competition coefficients are equal to 0. We see
 that the populations manage to reach their $K$ (maximum supported population). 
@@ -9733,7 +9730,7 @@ data.frame("S1_fitness" = evalGenotype(genotype = "S1",
                                        fitnessEffects = S1S2_competition))
 ```
 
-#### Case 2: Stable coexistence
+### Case 2: Stable coexistence
 
 As described in page 166 from the book _"Analysis and Management of Animal_
 _Populations"_ [9], if the numerators of the equilibrium formulas are positive,
@@ -9847,7 +9844,7 @@ data.frame("S1_fitness" = evalGenotype(genotype = "S1",
                                        fitnessEffects = S1S2_competition))
 ```
 
-#### Case 3: Competitive Exclusion
+### Case 3: Competitive Exclusion
 
 If only one of the two conditions $K1 > a_{12}*K2$ or $K2 > a_{21}*K1$ is 
 achived the corresponding population eventually approaches its carrying capacity
@@ -9908,7 +9905,7 @@ compositionPop2(S1S2_simulation, main = "Competitive Exclusion",
                 ylab = "Number of individuals")
 ```
 
-#### Case 4: Unstable Population Equilibrium
+### Case 4: Unstable Population Equilibrium
 
 If both condition are:
 
@@ -10054,7 +10051,7 @@ compositionPop2(S1S2_simulation, main = "Unestable competition",
                 ylab = "Number of individuals")
 ```
 
-### Game Theory with social dilemmas of tumour acidity and vasculature
+## Game Theory with social dilemmas of tumour acidity and vasculature
 
 This example is based on the paper _Cancer treatment scheduling and dynamic_
 _heterogeneity in social dilemmas of tumour acidity and vasculature_ 
@@ -10106,7 +10103,7 @@ at a given time. All fitness equations start from balance by the sum of 1.
 Finally, depending of the parameter's values, the presented model can lead to
 three different situations:
 
-#### Fully glycolytic tumours: 
+### Fully glycolytic tumours: 
 
 If the fitness benefit of a single unit of acidification is higher than the
 maximum benefit from the club good for aerobic cells, then GLY cells will
@@ -10155,7 +10152,7 @@ simulation <- oncoSimulPop(20,
 plot(simulation[[1]], show = "genotypes", type = "line",
      ylab = "Number of individuals", main = "Fully glycolytic tumours",
      font.main=2, font.lab=2, cex.main=1.4, cex.lab=1.1, las = 1, 
-     legend.out = TRUE)
+     legend.out = TRUE, legend.pos = -0.22)
 
 ```
 
@@ -10167,7 +10164,7 @@ compositionPop2(simulation, ylab = "Number of individuals",
 
 ```
 
-#### Fully angiogenic tumours: 
+### Fully angiogenic tumours: 
 
 If the benefit to VOP from their extra unit of vascularisation is higher than
 the cost c to produce that unit, then VOP will always have a strictly higher
@@ -10217,7 +10214,7 @@ simulation <- oncoSimulPop(20,
 plot(simulation[[1]], show = "genotypes", type = "line",
      ylab = "Number of individuals", main = "Fully angiogenic tumours",
      font.main=2, font.lab=2, cex.main=1.4, cex.lab=1.1, las = 1, 
-     legend.out = TRUE)
+     legend.out = TRUE, legend.pos = -0.22)
 
 ```
 
@@ -10229,7 +10226,7 @@ compositionPop2(simulation, ylab = "Number of individuals",
 
 ```
 
-#### Heterogeneous tumours:
+### Heterogeneous tumours:
 
 If the benefit from an extra unit of vascularisation in a fully aerobic group
 is lower than the cost c to produce that unit, then for a sufficiently low
@@ -10281,7 +10278,7 @@ simulation <- oncoSimulPop(20,
 plot(simulation[[1]], show = "genotypes", type = "line",
      ylab = "Number of individuals", main = "Heterogeneous tumours",
      font.main=2, font.lab=2, cex.main=1.4, cex.lab=1.1, las = 1, 
-     legend.out = TRUE)
+     legend.out = TRUE, legend.pos = -0.22)
 
 ```
 
@@ -10293,7 +10290,7 @@ compositionPop2(simulation, ylab = "Number of individuals",
 
 ```
 
-### Prostate cancer tumour–stroma interactions 
+## Prostate cancer tumour–stroma interactions 
 
 This example is based on the paper _Investigating prostate cancer tumour–stroma_
 _interactions: clinical and biological insights from an evolutionary game_ 
@@ -10386,7 +10383,7 @@ where $f_2$ is the frequency of I cells and $f_3$ is the
 frequency of D cells at a given time. All fitness equations
 start from balance by the sum of 1. 
 
-#### Simulations
+### Simulations
 
 First, we define the fitness of the different genotypes (see Equations 
 \@ref(eq:fitnessS),  \@ref(eq:fitnessI) and \@ref(eq:fitnessD)) through 
@@ -10495,9 +10492,9 @@ simulScen1Pop <- oncoSimulPop(20,
 compositionPop2(simulScen1Pop,
                 main = "First scenario",
                 ylab = "Number of cells")
-  ```
+```
 
-### Second scenario
+#### Second scenario
 
 In this case, we set $\alpha$ lower than in the first scenario and we 
 enable the indepenence of I cells through a lower $\gamma$. 
@@ -10522,6 +10519,8 @@ scen2 <- allFitnessEffects(genotFitness = fitness_rel(a = 0.3, b = 0.7,
                                                      r = 0.1, g = 0.7),
                           frequencyDependentFitness = TRUE,
                           frequencyType = "rel")
+
+set.seed(1)
 
 simulScen2 <- oncoSimulIndiv(scen2,
                               model = "McFL",
@@ -10714,7 +10713,7 @@ compositionPop2(simulScen4Pop,
                 ylab = "Number of cells")
 ```
 
-### Evolutionary Dynamics of Tumor-Stroma Interactions in Multiple Myeloma
+## Evolutionary Dynamics of Tumor-Stroma Interactions in Multiple Myeloma
 
 This example is based on the paper _Evolutionary Dynamics of Tumor-Stroma_
 _Interactions in Multiple Myeloma_ [[10]](#Sartakhti), available at
@@ -10767,7 +10766,7 @@ produced by the cells are shown in the following table:
 Several scenarios varying the values of the parameters are shown in
 [[10]](#Sartakhti). Here we reproduce some of them.
 
-#### Simulations
+### Simulations
 
 First, we define the fitness of the different genotypes 
 through the function _fitness_rel_. 
@@ -10808,7 +10807,7 @@ will increase the probability of mutation of the wild type, which will
 disappear in early stages of the simulation. This is something that we must
 consider when interpreting the results. 
 
-#### Scenario 1
+### Scenario 1
 
 Here we model a common situation in multiple myeloma in which $c_1<c_2<c_3$. In
 the presence of a small number of MM cells, the stable point on the OB-OC
@@ -10857,18 +10856,16 @@ simulation <- oncoSimulPop(20,
 
 #Plot trajectorie
 plot(simulation[[1]], show = "genotypes", legend.out = TRUE)
-plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE)
+plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE, legend.pos = -0.215)
 
 ## Agreement: Show boxplot from several simulations. 
 compositionPop2(simulation)
-
-
 ```
 
 Clearly, the appearance of MM cells quickly brings the system to an equilibrium
 point, which is stable. OB cells are extinct and cancer has propelled.
 
-#### Scenario 2
+### Scenario 2
 
 As in the second scenario of [[10]](#Sartakhti) ($c1=c2=c3$) configuration A (upper
 row in the grid of images). We should find one stable point on the OC-OB edge
@@ -10916,7 +10913,7 @@ simulation <- oncoSimulPop(20,
 
 #Plot trajectorie
 plot(simulation[[1]], show = "genotypes", legend.out = TRUE)
-plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE)
+plot(simulation[[1]], show = "genotypes", type = "line", legend.out = TRUE, legend.pos = -0.215)
 
 ## Agreement: Show boxplot from several simulations. 
 compositionPop2(simulation)
@@ -10926,7 +10923,7 @@ As expected, under these condtitions, MM cells are not able to propagate. The
 equilibrium point in the OB-OC edge is stable, resisting small variations in
 the number of MM cells.
 
-#### Scenario 3
+### Scenario 3
 
 Here we imitate the conditions presented in the third scenario of
 [[10]](#Sartakhti) ($c3<c1<c2$) configuration A (left). If diffusion range
@@ -10986,7 +10983,8 @@ is a huge variance in the results of the $20$ simulations. Sometimes, MM cells
 become extint; but other times they manage to proliferate, leading to a sharp
 reduction in the number of OB and OC cells.
 
-### References
+## References
+
 <a id="Archetti"></a>
 [1]. Archetti, M., Pienta, K.J. Cooperation among cancer cells: applying game
 theory to cancer. Nat Rev Cancer 19, 110–117 (2019)
