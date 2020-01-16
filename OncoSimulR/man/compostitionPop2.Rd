@@ -13,8 +13,9 @@ in order to see the distribution of the results from several simulations.
 
 }
 \usage{
-compositionPop2(objPop, cols = NULL, ...)
-
+compositionPop2(objPop, cols = NULL,  xlab = "Genotype",
+                ylab = "N", main = FALSE, ...)
+}
 \arguments{
   \item{objPop}{
 Data frame from the class oncosimulpop or oncosimul which contains the results
@@ -22,6 +23,15 @@ of the simulations in \code{pop.by.time}.
 }
   \item{cols}{
   Colours used to represent the boxplot. If cols = NULL colours from stacked plots of OncoSimulR are used. 
+  }
+  \item{main}{
+  Optional title for the boxplot. If main = FALSE no title is shown. If main is different from FALSE the boxplot title will be the string passed in main. 
+  }
+  \item{xlab}{
+  Text for x axis label
+  }
+  \item{ylab}{
+  Text for y axis label
   }
   \item{...}{ --- }
 }

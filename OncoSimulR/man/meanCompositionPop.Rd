@@ -11,7 +11,7 @@ It allows to see the distribution of results form several simulations from
 oncosimulPop.It generates a strip chart with the average of the results from the middle to the end of a simulation for each genotype. 
 }
 \usage{
-meanCompositionPop(objPop, ...)
+meanCompositionPop(objPop, ylab = "N", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,9 +19,6 @@ meanCompositionPop(objPop, ...)
 Data frame from the class oncosimulpop or oncosimul which contains the results
 of the simulations in \code{pop.by.time}.
 }
-  \item{dfPop}{
-  Data frame created by \code{meanCompositionPop} which contains the mean result from several simulations for each genotype.
-  }
   \item{ylab}{
   Text for y axis label.
   }
