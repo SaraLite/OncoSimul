@@ -1162,7 +1162,7 @@ plot.oncosimul <- function(x,
     if(plotClones && plotDrivers && (type == "line"))
         par(new = TRUE)
     
-    if( plotDrivers && (type == "line") ) {
+    if(plotDrivers && (type == "line") ) {
         plotDrivers0(x,
                      ndr,
                      timescale = 1,
@@ -1254,7 +1254,10 @@ plotClonesSt <- function(z,
         ## If legend.pos is zero (by default), the inset value is -0.2
         ## This value allows a correct position in Rmarkdown files
         if (legend.pos == 0)
-            inset = -0.2
+            if (type == "line")
+                inset = -0.215
+            else if (type == "stacked")
+                inset = -0.2
         else
             inset = legend.pos
     } else {
